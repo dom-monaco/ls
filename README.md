@@ -21,3 +21,10 @@ python webserver.py <path> [port]
 ```
 path is the desired working directory for the application.
 port is optional and defaults to 8000.
+
+
+### Testing
+From dir of repo.
+```
+pytest -v tests/test_api.py
+```

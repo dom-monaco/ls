@@ -8,24 +8,29 @@ import os
 BASE_URL = "http://localhost:8000"
 
 def test_get_root_endpoint():
-    r = requests.get(f"{BASE_URL}/")
-    assert r.status_code == 200
+    req = requests.get(f"{BASE_URL}/")
+    assert req.status_code == 200
 
 def test_get_path_endpoint():
     cwd = os.getcwd()
-    r1 = requests.get(f"{BASE_URL}/{cwd}/tests/test_dir/test1.txt")
-    assert r1.status_code == 200
-    assert "This program is amazing!" in r1.text
-    r2 = requests.get(f"{BASE_URL}/{cwd}/tests/test_dir/test2.py")
-    assert r2.status_code == 200
-    assert "def function():" in r2.text
+    filepath = f"{BASE_URL}/{cwd}/tests/test_dir"
+    req1 = requests.get(f"{filepath}/test1.txt")
+    assert req1.status_code == 200
+    assert "This program is amazing!" in req1.text
+    req2 = requests.get(f"{filepath}/test2.py")
+    assert req2.status_code == 200
+    assert "def function():" in req2.text
 
 def test_post_newfile_endpoint():
     cwd = os.getcwd()
+    filepath = f"{cwd}/tests/newfilename.txt"
+    if os.path.exists(filepath):
+        os.remove(filepath)
     file_content = "newfile for tests"
-    pr = requests.post(f"{BASE_URL}/{cwd}/tests/newfilename.txt", data=file_content)
-    assert pr.status_code == 201
-    gr = requests.get(f"{BASE_URL}/{cwd}/tests/newfilename.txt")
-    assert gr.status_code == 200
-    assert file_content in gr.text
-    os.remove(f"{cwd}/tests/newfilename.txt")
+
+    preq = requests.post(f"{BASE_URL}/{filepath}", data=file_content)
+    assert preq.status_code == 201
+    greq = requests.get(f"{BASE_URL}/{filepath}")
+    assert greq.status_code == 200
+    assert file_content in greq.text
+    os.remove(filepath)
