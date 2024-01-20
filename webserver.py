@@ -23,7 +23,7 @@ def get_path(path):
         return 'Not found', 404
 
 @app.route('/<path:path>', methods=['POST'])
-def post_new_file(): 
+def post_new_file(path): 
     full_path = os.path.join('/', path)
     if os.path.exists(full_path):
         return 'Conflict: file already exists', 409
