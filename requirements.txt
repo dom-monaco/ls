@@ -1,2 +1,4 @@
-Flask==3.0.*
-humanize==4.9.*
+Flask~=3.0
+humanize~=4.9
+pytest~=7.4
+requests~=2.31
