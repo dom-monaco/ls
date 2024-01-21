@@ -58,4 +58,4 @@ if __name__ == '__main__':
     path = sys.argv[1]
     port = int(sys.argv[2]) if len(sys.argv) > 2 else 8000
     os.chdir(path)
-    app.run(port=port)
+    app.run(port=port, host='0.0.0.0')
