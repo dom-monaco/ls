@@ -1,6 +1,3 @@
-# You can run the tests using the following command (while server is running):
-# pytest -v test_api.py
-
 import pytest
 import requests
 import os
