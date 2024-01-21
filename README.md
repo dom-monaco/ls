@@ -22,9 +22,21 @@ python webserver.py <path> [port]
 path is the desired working directory for the application.
 port is optional and defaults to 8000.
 
+### Docker
+Build image
+```
+docker build -t ls_api .
+```
+Run image
+```
+docker run --rm -it -p 8000:8000 -v /:/app/root ls
+```
 
 ### Testing
 From dir of repo.
 ```
 pytest -v tests/test_api.py
 ```
+
+## Contributing
+There is a github action workflow setup for pushes to main branch that will build and publish the image on dockerhub.
